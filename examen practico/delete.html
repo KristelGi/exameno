@@ -1,0 +1,62 @@
+{% extends 'home.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3>{{ title }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading">¿Está seguro de eliminar este préstamo?</h4>
+                <p>Esta acción no se puede deshacer.</p>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Detalles del préstamo</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Empleado:</th>
+                                <td>{{ prestamo.empleado.nombre }}</td>
+                            </tr>
+                            <tr>
+                                <th>Tipo de préstamo:</th>
+                                <td>{{ prestamo.tipo_prestamo.descripcion }}</td>
+                            </tr>
+                            <tr>
+                                <th>Fecha:</th>
+                                <td>{{ prestamo.fecha_prestamo }}</td>
+                            </tr>
+                            <tr>
+                                <th>Monto:</th>
+                                <td>${{ prestamo.monto }}</td>
+                            </tr>
+                            <tr>
+                                <th>Interés:</th>
+                                <td>${{ prestamo.interes }}</td>
+                            </tr>
+                            <tr>
+                                <th>Total a pagar:</th>
+                                <td>${{ prestamo.monto_pagar }}</td>
+                            </tr>
+                            <tr>
+                                <th>Saldo actual:</th>
+                                <td>${{ prestamo.saldo }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'Nomina:listar_prestamo' %}" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Confirmar Eliminación</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
